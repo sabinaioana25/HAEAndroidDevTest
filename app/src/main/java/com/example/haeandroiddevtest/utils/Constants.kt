@@ -10,4 +10,3 @@ const val CITY_LONDON = "london"
 const val CITY_NOTTINGHAM = "nottingham"
 const val DATE_FORMAT = "dd MMM HH:mm:ss"
 const val PACKAGE_NAME = "com.example.haeandroiddevtest"
-const val REQUEST_CODE_PERMISSION = 1
