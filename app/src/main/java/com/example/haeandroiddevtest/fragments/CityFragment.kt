@@ -1,4 +1,9 @@
-package com.example.haeandroiddevtest.fragments
+package com.example
+
+import com.example.haeandroiddevtest.fragments.MainViewModel
+import com.example.haeandroiddevtest.fragments.ViewModelFactory
+
+.. .fragments
 
 import android.os.*
 import android.view.LayoutInflater
