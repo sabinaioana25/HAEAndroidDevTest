@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HAEAndroidDevTest</string>
+    <string name="button_launch">Launch App</string>
+    <string name="text_view_battery">Battery</string>
+    <string name="text_view_clock">Clock</string>
+    <string name="text_view_city_beijing">Beijing</string>
+</resources>
