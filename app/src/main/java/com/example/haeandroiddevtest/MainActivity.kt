@@ -14,10 +14,8 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 import com.example.haeandroiddevtest.utils.DATE_FORMAT
-import com.example.haeandroiddevtest.utils.PACKAGE_NAME
 import kotlinx.coroutines.launch
 import android.content.pm.PackageManager
-import com.example.haeandroiddevtest.utils.REQUEST_CODE_PERMISSION
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,19 +25,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        val cityDetailsRepository = CityDetailsRepository()
-        lifecycleScope.launch {
-            var listOfCities = cityDetailsRepository.refreshList()
-            Log.i("MainActivity", "$listOfCities")
-        }
-    }
-
-    fun launchApp() {
-        val packageName = PACKAGE_NAME
-        val launchIntent =
-            packageManager.getLaunchIntentForPackage(packageName)
-        if (launchIntent != null) startActivity(launchIntent)
-        else Toast.makeText(this, "Unable to launch app", Toast.LENGTH_SHORT).show()
     }
 }
