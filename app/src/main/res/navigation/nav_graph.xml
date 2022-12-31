@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/cityFragment"
-        android:name="com.example.haeandroiddevtest.fragments.CityFragment"
+        android:name="com.example.haeandroiddevtest.fragments.MainFragment"
         android:label="CityFragment" />
 </navigation>

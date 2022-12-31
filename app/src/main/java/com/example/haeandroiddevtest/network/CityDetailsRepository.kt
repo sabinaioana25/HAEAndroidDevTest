@@ -2,31 +2,30 @@ package com.example.haeandroiddevtest.network
 
 
 import android.util.Log
+import com.example.haeandroiddevtest.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class CityDetailsRepository {
 
-    suspend fun refreshList(): Cities {
+    suspend fun refreshList(): ArrayList<City> {
         return withContext(Dispatchers.IO) {
-            return@withContext getCityProperties()
+            val cities = arrayListOf<City>()
+            CITIES.forEach { city ->
+                cities.add(getCityDetails(city))
+            }
+            return@withContext cities
         }
     }
 
-    suspend fun getCityProperties(): Cities {
+    private suspend fun getCityDetails(city: String): City {
         return withContext(Dispatchers.IO) {
             try {
-                Log.i("CityDetailsRepository", CityApi.retrofitService.getBeijingDetails().toString())
-                return@withContext CityApi.retrofitService.getBeijingDetails()
-//                return@withContext CityApi.retrofitService.getBerlinDetail()
-//                return@withContext CityApi.retrofitService.getCardiffDetail()
-//                return@withContext CityApi.retrofitService.getEdinburghDetail()
-//                return@withContext CityApi.retrofitService.getLondonDetails()
-//                return@withContext CityApi.retrofitService.getNottinghamDetails()
+                return@withContext CityApi.retrofitService.getCityDetails(city)
             } catch (e: Exception) {
                 Log.d("CityDetailsRepository", "Error: $e")
-                return@withContext Cities("beijing", "china", 5, "some weather condition")
+                return@withContext City(city, "$e", 0, "$e")
             }
         }
     }
