@@ -13,19 +13,19 @@ class CityDetailsRepository {
         return withContext(Dispatchers.IO) {
             val cities = arrayListOf<City>()
             CITIES.forEach { city ->
-                cities.add(getCityDetails(city))
+                getCityDetails(city)?.let { cities.add(it) }
             }
             return@withContext cities
         }
     }
 
-    private suspend fun getCityDetails(city: String): City {
+    private suspend fun getCityDetails(city: String): City? {
         return withContext(Dispatchers.IO) {
             try {
                 return@withContext CityApi.retrofitService.getCityDetails(city)
             } catch (e: Exception) {
                 Log.d("CityDetailsRepository", "Error: $e")
-                return@withContext City(city, "$e", 0, "$e")
+                return@withContext null
             }
         }
     }
