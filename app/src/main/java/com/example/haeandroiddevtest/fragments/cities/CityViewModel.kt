@@ -40,13 +40,6 @@ class CityViewModel(val app: Application, private val cityDetailsRepository: Cit
         }
     }
 
-//    fun launchApp(context: Context): Boolean {
-//        val intent = context.packageManager.getLaunchIntentForPackage(PACKAGE_NAME)
-//        if (intent != null) startActivity(context, intent, null)
-//        else Toast.makeText(context, "Unable to launch app", Toast.LENGTH_SHORT).show()
-//        return true
-//    }
-
     override fun onCleared() {
         super.onCleared()
         handler.removeCallbacks(runnable)

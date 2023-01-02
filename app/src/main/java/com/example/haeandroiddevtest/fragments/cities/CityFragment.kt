@@ -1,7 +1,6 @@
 package com.example.haeandroiddevtest.fragments.cities
 
 import android.os.*
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,6 @@ class CityFragment : Fragment() {
     private val binding: FragmentMainBinding
         get() = _binding!!
 
-    val appListFragment = AppListFragment()
     private val cityDetailsRepository = CitiesRepository()
 
     override fun onCreateView(
@@ -31,7 +29,6 @@ class CityFragment : Fragment() {
     ): View {
 
         viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application, cityDetailsRepository))[CityViewModel::class.java]
-        Log.e("MainFragment", appListFragment.toString())
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         _binding?.apply {
             lifecycleOwner = viewLifecycleOwner
