@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/cityFragment">
+    app:startDestination="@id/MainFragment">
 
     <fragment
-        android:id="@+id/cityFragment"
+        android:id="@+id/MainFragment"
         android:name="com.example.haeandroiddevtest.fragments.MainFragment"
-        android:label="CityFragment" >
+        android:label="CityFragment"
+        tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_cityFragment_to_appListFragment"
-            app:destination="@id/appListFragment" />
+            android:id="@+id/nav_to_appListFragment"
+            app:destination="@id/AppListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/appListFragment"
+        android:id="@+id/AppListFragment"
         android:name="com.example.haeandroiddevtest.fragments.AppListFragment"
-        android:label="AppListFragment" />
+        android:label="AppListFragment"
+        tools:layout="@layout/fragment_app_list" />
 </navigation>

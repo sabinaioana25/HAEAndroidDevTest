@@ -8,5 +8,6 @@ data class City(
 )
 
 data class AppItem(
-    val name: String
+    val appName: String,
+    val packageName: String
 )

@@ -2,13 +2,10 @@ package com.example.haeandroiddevtest.fragments
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.ViewParent
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.haeandroiddevtest.databinding.AppItemViewBinding
-import com.example.haeandroiddevtest.databinding.CityItemViewBinding
-import com.example.haeandroiddevtest.fragments.CityItemAdapter.ViewHolder.Companion.from
 import com.example.haeandroiddevtest.network.AppItem
 
 class AppItemAdapter : ListAdapter<AppItem, AppItemAdapter.ViewHolder>(DiffCallBack) {
@@ -40,7 +37,7 @@ class AppItemAdapter : ListAdapter<AppItem, AppItemAdapter.ViewHolder>(DiffCallB
         }
 
         override fun areContentsTheSame(oldItem: AppItem, newItem: AppItem): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.appName == newItem.appName
         }
     }
 }

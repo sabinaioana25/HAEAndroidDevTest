@@ -1,11 +1,13 @@
 package com.example.haeandroiddevtest.fragments
 
+import android.app.Application
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,10 +18,9 @@ import com.example.haeandroiddevtest.utils.PACKAGE_NAME
 
 import com.example.haeandroiddevtest.utils.checkBatteryCharge
 import com.example.haeandroiddevtest.utils.displayCurrentTime
-import com.example.haeandroiddevtest.utils.getInstalledApps
 import kotlinx.coroutines.launch
 
-class MainViewModel(val context: Context, private val cityDetailsRepository: CityDetailsRepository) : ViewModel() {
+class MainViewModel(val app: Application, private val cityDetailsRepository: CityDetailsRepository) : AndroidViewModel(app) {
 
     private var _time = MutableLiveData<String>()
     val time: LiveData<String>
@@ -29,42 +30,33 @@ class MainViewModel(val context: Context, private val cityDetailsRepository: Cit
         get() = _batteryCharge
 
     val handler = Handler(Looper.getMainLooper())
-    val batteryHandler = Handler(Looper.getMainLooper())
     private var _cities = MutableLiveData<ArrayList<City>>()
     val cities: LiveData<ArrayList<City>> = _cities
 
     private val runnable = object : Runnable {
         override fun run() {
             _time.value = displayCurrentTime()
+            _batteryCharge.value = app.checkBatteryCharge()
             handler.postDelayed(this, 1000)
-            _batteryCharge.value = checkBatteryCharge(context)
-            batteryHandler.postDelayed(this, 5000)
         }
     }
 
     init {
         handler.post(runnable)
-        batteryHandler.post(runnable)
         viewModelScope.launch {
             _cities.value = cityDetailsRepository.refreshList()
-            Log.i("MainViewModel", "${cities.value}")
-
-            getInstalledApps(context)
-            Log.e("MainViewModel++", getInstalledApps(context).toString())
         }
-
     }
 
-    fun launchApp(context: Context): Boolean {
-        val intent = context.packageManager.getLaunchIntentForPackage(PACKAGE_NAME)
-        if (intent != null) startActivity(context, intent, null)
-        else Toast.makeText(context, "Unable to launch app", Toast.LENGTH_SHORT).show()
-        return true
-    }
+//    fun launchApp(context: Context): Boolean {
+//        val intent = context.packageManager.getLaunchIntentForPackage(PACKAGE_NAME)
+//        if (intent != null) startActivity(context, intent, null)
+//        else Toast.makeText(context, "Unable to launch app", Toast.LENGTH_SHORT).show()
+//        return true
+//    }
 
     override fun onCleared() {
         super.onCleared()
         handler.removeCallbacks(runnable)
-        batteryHandler.removeCallbacks(runnable)
     }
 }

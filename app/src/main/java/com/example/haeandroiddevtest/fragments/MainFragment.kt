@@ -1,15 +1,19 @@
 package com.example.haeandroiddevtest.fragments
 
 import android.os.*
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import com.example.haeandroiddevtest.R
 import com.example.haeandroiddevtest.databinding.FragmentMainBinding
 import com.example.haeandroiddevtest.network.CityDetailsRepository
+import com.example.haeandroiddevtest.utils.*
+
 
 class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
@@ -17,6 +21,7 @@ class MainFragment : Fragment() {
     private val binding: FragmentMainBinding
         get() = _binding!!
 
+    val appListFragment = AppListFragment()
     private val cityDetailsRepository = CityDetailsRepository()
 
     override fun onCreateView(
@@ -24,8 +29,8 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        viewModel = ViewModelProvider(this, ViewModelFactory(requireContext(), cityDetailsRepository))[MainViewModel::class.java]
-
+        viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application, cityDetailsRepository))[MainViewModel::class.java]
+        Log.e("MainFragment", appListFragment.toString())
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         _binding?.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -33,9 +38,13 @@ class MainFragment : Fragment() {
             viewModel.batteryCharge.observe(viewLifecycleOwner) { newBatteryCharge ->
                 tvBattery.text = newBatteryCharge.toString()
             }
-            launchButton.setOnClickListener {
-                context?.let { viewModel.launchApp(it) }
-            }
+//            launchButton.setOnClickListener {
+//                context?.let {
+//                    viewModel.launchApp(it)
+//                    navigate(MainFragmentDirections.nav_to_appListFragment)
+////                    NavHostFragment.findNavController().navigate()
+//                }
+//            }
             rvCityList.adapter = CityItemAdapter()
         }
         return binding.root
