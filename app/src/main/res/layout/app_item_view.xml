@@ -15,13 +15,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/item_app"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/item_app_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:bindSingleAppInfo="@{varAppItem}"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent">
 
+            <TextView
+                android:id="@+id/item_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingStart="@dimen/view_padding"
+                android:paddingEnd="@dimen/view_padding"
+                android:paddingTop="@dimen/view_padding"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_app"
+                android:paddingStart="@dimen/view_padding"
+                android:paddingEnd="@dimen/view_padding"
+                android:paddingTop="@dimen/view_padding"/>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

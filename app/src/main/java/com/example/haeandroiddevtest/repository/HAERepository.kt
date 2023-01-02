@@ -8,7 +8,7 @@ import com.example.haeandroiddevtest.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class CitiesRepository {
+class HAERepository {
 
     private val _cityData = MutableLiveData<ArrayList<City>>(arrayListOf())
     val cityData: LiveData<ArrayList<City>> = _cityData

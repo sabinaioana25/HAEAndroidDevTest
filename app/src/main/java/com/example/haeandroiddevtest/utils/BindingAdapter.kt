@@ -24,6 +24,12 @@ fun LinearLayout.bindCityLayout(city: City) {
 }
 
 @BindingAdapter("bindAppData")
-fun RecyclerView.bindAppData(appItems: MutableList<AppItem?>) = appItems?.let {
+fun RecyclerView.bindAppData(appItems: MutableList<AppItem>?) = appItems.let {
     (adapter as AppListItemAdapter).submitList(appItems)
+}
+
+@BindingAdapter("bindSingleAppInfo")
+fun LinearLayout.bindSingleAppInfo(appItem: AppItem) {
+    (getChildAt(0) as TextView).text = appItem.appName
+    (getChildAt(0) as TextView).text = appItem.packageName
 }

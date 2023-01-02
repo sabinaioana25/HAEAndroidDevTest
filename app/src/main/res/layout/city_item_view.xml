@@ -31,29 +31,33 @@
                 android:id="@+id/item_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="4dp"
-                android:paddingTop="4dp"/>
+                android:paddingStart="@dimen/view_padding"
+                android:paddingEnd="@dimen/view_padding"
+                android:paddingTop="@dimen/view_padding"/>
 
             <TextView
                 android:id="@+id/item_country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="4dp"
-                android:paddingTop="4dp"/>
+                android:paddingStart="@dimen/view_padding"
+                android:paddingEnd="@dimen/view_padding"
+                android:paddingTop="@dimen/view_padding"/>
 
             <TextView
                 android:id="@+id/item_temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="4dp"
-                android:paddingTop="4dp"/>
+                android:paddingStart="@dimen/view_padding"
+                android:paddingEnd="@dimen/view_padding"
+                android:paddingTop="@dimen/view_padding"/>
 
             <TextView
                 android:id="@+id/item_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="4dp"
-                android:paddingTop="4dp"/>
+                android:paddingStart="@dimen/view_padding"
+                android:paddingEnd="@dimen/view_padding"
+                android:paddingTop="@dimen/view_padding"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

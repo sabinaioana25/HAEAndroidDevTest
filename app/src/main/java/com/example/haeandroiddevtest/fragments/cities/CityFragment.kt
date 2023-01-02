@@ -9,27 +9,25 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.haeandroiddevtest.R
-import com.example.haeandroiddevtest.databinding.FragmentMainBinding
-import com.example.haeandroiddevtest.fragments.apps.AppListFragment
+import com.example.haeandroiddevtest.databinding.FragmentCityBinding
+import com.example.haeandroiddevtest.repository.HAERepository
 import com.example.haeandroiddevtest.utils.ViewModelFactory
-import com.example.haeandroiddevtest.repository.CitiesRepository
-
 
 class CityFragment : Fragment() {
     private lateinit var viewModel: CityViewModel
-    private var _binding: FragmentMainBinding? = null
-    private val binding: FragmentMainBinding
+    private var _binding: FragmentCityBinding? = null
+    private val binding: FragmentCityBinding
         get() = _binding!!
 
-    private val cityDetailsRepository = CitiesRepository()
+    private val haeDetailsRepository = HAERepository()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application, cityDetailsRepository))[CityViewModel::class.java]
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+        viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application, haeDetailsRepository))[CityViewModel::class.java]
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_city, container, false)
         _binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             varViewModel = viewModel

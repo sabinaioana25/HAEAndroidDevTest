@@ -8,12 +8,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.haeandroiddevtest.domain.City
-import com.example.haeandroiddevtest.repository.CitiesRepository
+import com.example.haeandroiddevtest.repository.HAERepository
 import com.example.haeandroiddevtest.utils.checkBatteryCharge
 import com.example.haeandroiddevtest.utils.displayCurrentTime
 import kotlinx.coroutines.launch
 
-class CityViewModel(val app: Application, private val cityDetailsRepository: CitiesRepository) : AndroidViewModel(app) {
+class CityViewModel(val app: Application, private val cityDetailsRepository: HAERepository) : AndroidViewModel(app) {
 
     private var _time = MutableLiveData<String>()
     val time: LiveData<String>
