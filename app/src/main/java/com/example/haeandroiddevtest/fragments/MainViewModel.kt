@@ -16,6 +16,7 @@ import com.example.haeandroiddevtest.utils.PACKAGE_NAME
 
 import com.example.haeandroiddevtest.utils.checkBatteryCharge
 import com.example.haeandroiddevtest.utils.displayCurrentTime
+import com.example.haeandroiddevtest.utils.getInstalledApps
 import kotlinx.coroutines.launch
 
 class MainViewModel(val context: Context, private val cityDetailsRepository: CityDetailsRepository) : ViewModel() {
@@ -47,7 +48,11 @@ class MainViewModel(val context: Context, private val cityDetailsRepository: Cit
         viewModelScope.launch {
             _cities.value = cityDetailsRepository.refreshList()
             Log.i("MainViewModel", "${cities.value}")
+
+            getInstalledApps(context)
+            Log.e("MainViewModel++", getInstalledApps(context).toString())
         }
+
     }
 
     fun launchApp(context: Context): Boolean {

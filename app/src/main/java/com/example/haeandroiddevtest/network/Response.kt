@@ -6,3 +6,7 @@ data class City(
     val temperature: Int,
     val description: String
 )
+
+data class AppItem(
+    val name: String
+)

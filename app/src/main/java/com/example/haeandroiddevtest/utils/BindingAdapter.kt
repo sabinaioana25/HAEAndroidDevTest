@@ -4,7 +4,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.haeandroiddevtest.fragments.AppItemAdapter
 import com.example.haeandroiddevtest.fragments.CityItemAdapter
+import com.example.haeandroiddevtest.network.AppItem
 import com.example.haeandroiddevtest.network.City
 import org.w3c.dom.Text
 import java.text.SimpleDateFormat
@@ -22,4 +24,9 @@ fun LinearLayout.bindCityLayout(city: City) {
     (getChildAt(1) as TextView).text = city.country
     (getChildAt(2) as TextView).text = city.temperature.toString()
     (getChildAt(3) as TextView).text = city.description
+}
+
+@BindingAdapter("bindAppData")
+fun RecyclerView.bindAppData(appItems: MutableList<AppItem?>) = appItems?.let {
+    (adapter as AppItemAdapter).submitList(appItems)
 }

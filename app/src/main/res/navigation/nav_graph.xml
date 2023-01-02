@@ -7,5 +7,13 @@
     <fragment
         android:id="@+id/cityFragment"
         android:name="com.example.haeandroiddevtest.fragments.MainFragment"
-        android:label="CityFragment" />
+        android:label="CityFragment" >
+        <action
+            android:id="@+id/action_cityFragment_to_appListFragment"
+            app:destination="@id/appListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/appListFragment"
+        android:name="com.example.haeandroiddevtest.fragments.AppListFragment"
+        android:label="AppListFragment" />
 </navigation>
