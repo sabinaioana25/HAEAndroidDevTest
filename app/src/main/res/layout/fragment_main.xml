@@ -8,7 +8,7 @@
 
         <variable
             name="varViewModel"
-            type="com.example.haeandroiddevtest.fragments.MainViewModel" />
+            type="com.example.haeandroiddevtest.fragments.cities.CityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

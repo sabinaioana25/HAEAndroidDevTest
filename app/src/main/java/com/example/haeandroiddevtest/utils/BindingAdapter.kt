@@ -4,13 +4,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.haeandroiddevtest.fragments.AppItemAdapter
-import com.example.haeandroiddevtest.fragments.CityItemAdapter
-import com.example.haeandroiddevtest.network.AppItem
-import com.example.haeandroiddevtest.network.City
-import org.w3c.dom.Text
-import java.text.SimpleDateFormat
-import java.time.LocalDate
+import com.example.haeandroiddevtest.fragments.apps.AppListItemAdapter
+import com.example.haeandroiddevtest.fragments.cities.CityItemAdapter
+import com.example.haeandroiddevtest.domain.AppItem
+import com.example.haeandroiddevtest.domain.City
 import java.util.*
 
 @BindingAdapter("bindCityData")
@@ -28,5 +25,5 @@ fun LinearLayout.bindCityLayout(city: City) {
 
 @BindingAdapter("bindAppData")
 fun RecyclerView.bindAppData(appItems: MutableList<AppItem?>) = appItems?.let {
-    (adapter as AppItemAdapter).submitList(appItems)
+    (adapter as AppListItemAdapter).submitList(appItems)
 }

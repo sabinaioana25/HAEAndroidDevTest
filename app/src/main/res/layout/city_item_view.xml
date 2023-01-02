@@ -8,7 +8,7 @@
 
         <variable
             name="varCity"
-            type="com.example.haeandroiddevtest.network.City" />
+            type="com.example.haeandroiddevtest.domain.City" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

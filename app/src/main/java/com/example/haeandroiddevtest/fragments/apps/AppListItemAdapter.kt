@@ -1,4 +1,4 @@
-package com.example.haeandroiddevtest.fragments
+package com.example.haeandroiddevtest.fragments.apps
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.haeandroiddevtest.databinding.AppItemViewBinding
-import com.example.haeandroiddevtest.network.AppItem
+import com.example.haeandroiddevtest.domain.AppItem
 
-class AppItemAdapter : ListAdapter<AppItem, AppItemAdapter.ViewHolder>(DiffCallBack) {
+class AppListItemAdapter : ListAdapter<AppItem, AppListItemAdapter.ViewHolder>(DiffCallBack) {
 
     private lateinit var appBinding: AppItemViewBinding
     private var applicationList: List<AppItem>? = null

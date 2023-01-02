@@ -1,10 +1,8 @@
-package com.example.haeandroiddevtest.fragments
+package com.example.haeandroiddevtest.fragments.apps
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.haeandroiddevtest.R
 import com.example.haeandroiddevtest.databinding.FragmentAppListBinding
-import com.example.haeandroiddevtest.network.AppItem
+import com.example.haeandroiddevtest.domain.*
 
 class AppListFragment : Fragment() {
     private var _binding: FragmentAppListBinding? = null
@@ -38,7 +36,7 @@ class AppListFragment : Fragment() {
             appList.add(app)
         }
         _binding?.apply {
-            rvAppList.adapter = AppItemAdapter().also {
+            rvAppList.adapter = AppListItemAdapter().also {
                 it.updateAppList(appList.sortedWith { o1, o2 ->
                     o1?.appName?.compareTo(o2?.appName ?: "", true) ?: 0
                 })

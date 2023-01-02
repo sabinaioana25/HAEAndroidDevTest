@@ -1,4 +1,4 @@
-package com.example.haeandroiddevtest.fragments
+package com.example.haeandroiddevtest.fragments.cities
 
 import android.app.Application
 import android.os.Handler
@@ -7,14 +7,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.haeandroiddevtest.network.City
-import com.example.haeandroiddevtest.repository.CityDetailsRepository
-
+import com.example.haeandroiddevtest.domain.City
+import com.example.haeandroiddevtest.repository.CitiesRepository
 import com.example.haeandroiddevtest.utils.checkBatteryCharge
 import com.example.haeandroiddevtest.utils.displayCurrentTime
 import kotlinx.coroutines.launch
 
-class MainViewModel(val app: Application, private val cityDetailsRepository: CityDetailsRepository) : AndroidViewModel(app) {
+class CityViewModel(val app: Application, private val cityDetailsRepository: CitiesRepository) : AndroidViewModel(app) {
 
     private var _time = MutableLiveData<String>()
     val time: LiveData<String>
@@ -23,10 +22,9 @@ class MainViewModel(val app: Application, private val cityDetailsRepository: Cit
     val batteryCharge: LiveData<Int>
         get() = _batteryCharge
 
-    val handler = Handler(Looper.getMainLooper())
-
     val cities: LiveData<ArrayList<City>> = cityDetailsRepository.cityData
 
+    val handler = Handler(Looper.getMainLooper())
     private val runnable = object : Runnable {
         override fun run() {
             _time.value = displayCurrentTime()

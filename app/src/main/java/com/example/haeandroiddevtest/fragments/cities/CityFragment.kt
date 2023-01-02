@@ -1,4 +1,4 @@
-package com.example.haeandroiddevtest.fragments
+package com.example.haeandroiddevtest.fragments.cities
 
 import android.os.*
 import android.util.Log
@@ -7,32 +7,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.findFragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.example.haeandroiddevtest.R
 import com.example.haeandroiddevtest.databinding.FragmentMainBinding
-import com.example.haeandroiddevtest.repository.CityDetailsRepository
-import kotlinx.coroutines.launch
+import com.example.haeandroiddevtest.fragments.apps.AppListFragment
+import com.example.haeandroiddevtest.utils.ViewModelFactory
+import com.example.haeandroiddevtest.repository.CitiesRepository
 
 
-class MainFragment : Fragment() {
-    private lateinit var viewModel: MainViewModel
+class CityFragment : Fragment() {
+    private lateinit var viewModel: CityViewModel
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding
         get() = _binding!!
 
     val appListFragment = AppListFragment()
-    private val cityDetailsRepository = CityDetailsRepository()
+    private val cityDetailsRepository = CitiesRepository()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application, cityDetailsRepository))[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application, cityDetailsRepository))[CityViewModel::class.java]
         Log.e("MainFragment", appListFragment.toString())
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         _binding?.apply {

@@ -1,5 +1,6 @@
 package com.example.haeandroiddevtest.network
 
+import com.example.haeandroiddevtest.domain.City
 import com.example.haeandroiddevtest.utils.*
 import org.json.JSONObject
 import java.net.HttpURLConnection

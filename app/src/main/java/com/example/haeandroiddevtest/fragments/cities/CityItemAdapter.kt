@@ -1,14 +1,13 @@
-package com.example.haeandroiddevtest.fragments
+package com.example.haeandroiddevtest.fragments.cities
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.haeandroiddevtest.databinding.CityItemViewBinding
-import com.example.haeandroiddevtest.fragments.CityItemAdapter.ViewHolder.Companion.from
-import com.example.haeandroiddevtest.network.City
+import com.example.haeandroiddevtest.fragments.cities.CityItemAdapter.ViewHolder.Companion.from
+import com.example.haeandroiddevtest.domain.City
 
 class CityItemAdapter : ListAdapter<City, CityItemAdapter.ViewHolder>(DiffCallBack) {
 
