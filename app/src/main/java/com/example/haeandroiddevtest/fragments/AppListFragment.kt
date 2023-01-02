@@ -38,7 +38,11 @@ class AppListFragment : Fragment() {
             appList.add(app)
         }
         _binding?.apply {
-            rvAppList.adapter = AppItemAdapter()
+            rvAppList.adapter = AppItemAdapter().also {
+                it.updateAppList(appList.sortedWith { o1, o2 ->
+                    o1?.appName?.compareTo(o2?.appName ?: "", true) ?: 0
+                })
+            }
         }
         return binding.root
     }

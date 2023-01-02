@@ -1,29 +1,27 @@
 package com.example.haeandroiddevtest.network
 
 import com.example.haeandroiddevtest.utils.*
-import com.squareup.moshi.Moshi
-import retrofit2.Retrofit
-import retrofit2.http.GET
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.Path
+import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
 
-private val moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
+fun httpRequest(cityName: String): City {
 
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .baseUrl(BASE_URL)
-    .build()
-
-interface CityDetailApiService {
-    @GET("{id}")
-    suspend fun getCityDetails(@Path("id") id: String): City
-}
-
-object CityApi {
-    val retrofitService: CityDetailApiService by lazy {
-        retrofit.create(CityDetailApiService::class.java)
+    val url = URL("$BASE_URL/$cityName")
+    with(url.openConnection() as HttpURLConnection) {
+        requestMethod = "GET"
+        return if (responseCode in 200..299) {
+            val jsonResponse = JSONObject(inputStream.bufferedReader().use { it.readText() })
+            City(
+                jsonResponse.get("city").toString(),
+                jsonResponse.get("country").toString(),
+                jsonResponse.get("temperature").toString().toInt(),
+                jsonResponse.get("description").toString()
+            )
+        } else City("no available data for $cityName", "not available", 0, "not available")
     }
 }
+
+
+
+

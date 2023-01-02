@@ -10,6 +10,9 @@ import com.example.haeandroiddevtest.network.AppItem
 
 class AppItemAdapter : ListAdapter<AppItem, AppItemAdapter.ViewHolder>(DiffCallBack) {
 
+    private lateinit var appBinding: AppItemViewBinding
+    private var applicationList: List<AppItem>? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
@@ -39,5 +42,10 @@ class AppItemAdapter : ListAdapter<AppItem, AppItemAdapter.ViewHolder>(DiffCallB
         override fun areContentsTheSame(oldItem: AppItem, newItem: AppItem): Boolean {
             return oldItem.appName == newItem.appName
         }
+    }
+
+    fun updateAppList(appList: List<AppItem>) {
+        applicationList = appList
+        notifyDataSetChanged()
     }
 }

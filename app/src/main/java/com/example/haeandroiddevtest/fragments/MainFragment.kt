@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.haeandroiddevtest.R
 import com.example.haeandroiddevtest.databinding.FragmentMainBinding
-import com.example.haeandroiddevtest.network.CityDetailsRepository
-import com.example.haeandroiddevtest.utils.*
+import com.example.haeandroiddevtest.repository.CityDetailsRepository
+import kotlinx.coroutines.launch
 
 
 class MainFragment : Fragment() {
@@ -38,13 +41,9 @@ class MainFragment : Fragment() {
             viewModel.batteryCharge.observe(viewLifecycleOwner) { newBatteryCharge ->
                 tvBattery.text = newBatteryCharge.toString()
             }
-//            launchButton.setOnClickListener {
-//                context?.let {
-//                    viewModel.launchApp(it)
-//                    navigate(MainFragmentDirections.nav_to_appListFragment)
-////                    NavHostFragment.findNavController().navigate()
-//                }
-//            }
+            launchButton.setOnClickListener {
+                view?.findNavController()?.navigate(R.id.AppListFragment)
+            }
             rvCityList.adapter = CityItemAdapter()
         }
         return binding.root
