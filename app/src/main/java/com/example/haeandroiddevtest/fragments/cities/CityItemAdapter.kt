@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.haeandroiddevtest.databinding.CityItemViewBinding
 import com.example.haeandroiddevtest.fragments.cities.CityItemAdapter.ViewHolder.Companion.from
-import com.example.haeandroiddevtest.domain.City
+import com.example.haeandroiddevtest.domain.ItemCity
 
-class CityItemAdapter : ListAdapter<City, CityItemAdapter.ViewHolder>(DiffCallBack) {
+class CityItemAdapter : ListAdapter<ItemCity, CityItemAdapter.ViewHolder>(DiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return from(parent)
@@ -27,17 +27,17 @@ class CityItemAdapter : ListAdapter<City, CityItemAdapter.ViewHolder>(DiffCallBa
             }
         }
 
-        fun bind(city: City) {
+        fun bind(city: ItemCity) {
             binding.varCity = city
         }
     }
 
-    companion object DiffCallBack : DiffUtil.ItemCallback<City>() {
-        override fun areItemsTheSame(oldItem: City, newItem: City): Boolean {
+    companion object DiffCallBack : DiffUtil.ItemCallback<ItemCity>() {
+        override fun areItemsTheSame(oldItem: ItemCity, newItem: ItemCity): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: City, newItem: City): Boolean {
+        override fun areContentsTheSame(oldItem: ItemCity, newItem: ItemCity): Boolean {
             return oldItem.city == newItem.city
         }
     }

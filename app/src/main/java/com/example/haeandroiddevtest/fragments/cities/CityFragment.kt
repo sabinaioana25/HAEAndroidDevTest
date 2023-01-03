@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.haeandroiddevtest.R
 import com.example.haeandroiddevtest.databinding.FragmentCityBinding
 import com.example.haeandroiddevtest.repository.HAERepository
@@ -31,13 +34,13 @@ class CityFragment : Fragment() {
         _binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             varViewModel = viewModel
-            viewModel.batteryCharge.observe(viewLifecycleOwner) { newBatteryCharge ->
-                tvBattery.text = newBatteryCharge.toString()
-            }
-            launchButton.setOnClickListener {
-                view?.findNavController()?.navigate(R.id.AppListFragment)
-            }
             rvCityList.adapter = CityItemAdapter()
+        }
+        viewModel.navigateToFragment.observe(viewLifecycleOwner) {
+            if (it) {
+                findNavController().navigate(R.id.AppListFragment)
+                viewModel.onFragmentNavigated()
+            }
         }
         return binding.root
     }

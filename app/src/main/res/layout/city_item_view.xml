@@ -6,7 +6,7 @@
 
         <variable
             name="varCity"
-            type="com.example.haeandroiddevtest.domain.City" />
+            type="com.example.haeandroiddevtest.domain.ItemCity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,6 +55,5 @@
             android:paddingEnd="@dimen/view_padding"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_temperature" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

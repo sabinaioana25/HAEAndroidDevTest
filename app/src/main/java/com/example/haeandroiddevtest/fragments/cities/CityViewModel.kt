@@ -7,13 +7,25 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.haeandroiddevtest.domain.City
+import com.example.haeandroiddevtest.domain.ItemCity
 import com.example.haeandroiddevtest.repository.HAERepository
 import com.example.haeandroiddevtest.utils.checkBatteryCharge
 import com.example.haeandroiddevtest.utils.displayCurrentTime
 import kotlinx.coroutines.launch
 
 class CityViewModel(val app: Application, private val cityDetailsRepository: HAERepository) : AndroidViewModel(app) {
+
+    private val _navigateToFragment = MutableLiveData<Boolean>()
+    val navigateToFragment: LiveData<Boolean>
+        get() = _navigateToFragment
+
+    fun onButtonClick() {
+        _navigateToFragment.value = true
+    }
+
+    fun onFragmentNavigated() {
+        _navigateToFragment.value = false
+    }
 
     private var _time = MutableLiveData<String>()
     val time: LiveData<String>
@@ -22,7 +34,7 @@ class CityViewModel(val app: Application, private val cityDetailsRepository: HAE
     val batteryCharge: LiveData<Int>
         get() = _batteryCharge
 
-    val cities: LiveData<ArrayList<City>> = cityDetailsRepository.cityData
+    val cities: LiveData<ArrayList<ItemCity>> = cityDetailsRepository.cityData
 
     val handler = Handler(Looper.getMainLooper())
     private val runnable = object : Runnable {

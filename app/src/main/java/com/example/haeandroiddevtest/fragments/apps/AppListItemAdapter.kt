@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.haeandroiddevtest.databinding.AppItemViewBinding
-import com.example.haeandroiddevtest.domain.AppItem
+import com.example.haeandroiddevtest.domain.ItemApp
 
-class AppListItemAdapter(private val clickListener: AppItemListener) : ListAdapter<AppItem, AppListItemAdapter.ViewHolder>(DiffCallBack) {
+class AppListItemAdapter(private val clickListener: AppItemListener) : ListAdapter<ItemApp, AppListItemAdapter.ViewHolder>(DiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -26,7 +26,7 @@ class AppListItemAdapter(private val clickListener: AppItemListener) : ListAdapt
             }
         }
 
-        fun bind(appItem: AppItem, clickListener: AppItemListener) {
+        fun bind(appItem: ItemApp, clickListener: AppItemListener) {
             binding.apply {
                 varAppItem = appItem
                 varClickListener = clickListener
@@ -34,17 +34,17 @@ class AppListItemAdapter(private val clickListener: AppItemListener) : ListAdapt
         }
     }
 
-    companion object DiffCallBack : DiffUtil.ItemCallback<AppItem>() {
-        override fun areItemsTheSame(oldItem: AppItem, newItem: AppItem): Boolean {
+    companion object DiffCallBack : DiffUtil.ItemCallback<ItemApp>() {
+        override fun areItemsTheSame(oldItem: ItemApp, newItem: ItemApp): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: AppItem, newItem: AppItem): Boolean {
+        override fun areContentsTheSame(oldItem: ItemApp, newItem: ItemApp): Boolean {
             return oldItem.appName == newItem.appName
         }
     }
 }
 
-class AppItemListener(val clickListener: (appItem: AppItem) -> Unit) {
-    fun onClick(appItem: AppItem) = clickListener(appItem)
+class AppItemListener(val clickListener: (appItem: ItemApp) -> Unit) {
+    fun onClick(appItem: ItemApp) = clickListener(appItem)
 }

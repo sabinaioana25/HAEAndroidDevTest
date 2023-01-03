@@ -22,8 +22,7 @@ class AppListFragment : Fragment() {
         get() = _binding!!
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
-            : View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application, null))[AppListViewModel::class.java]
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_app_list, container, false)
@@ -32,11 +31,11 @@ class AppListFragment : Fragment() {
             varAppViewModel = viewModel
 
             rvAppList.adapter = AppListItemAdapter(AppItemListener { appItem ->
-               try {
-                   startActivity(requireActivity().packageManager.getLaunchIntentForPackage(appItem.packageName))
-               } catch (e: ActivityNotFoundException) {
-                   e.printStackTrace()
-               }
+                try {
+                    startActivity(requireActivity().packageManager.getLaunchIntentForPackage(appItem.packageName))
+                } catch (e: ActivityNotFoundException) {
+                    e.printStackTrace()
+                }
             })
         }
         return binding.root
