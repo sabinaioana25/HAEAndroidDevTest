@@ -42,4 +42,3 @@ class CityItemAdapter : ListAdapter<ItemCity, CityItemAdapter.ViewHolder>(DiffCa
         }
     }
 }
-

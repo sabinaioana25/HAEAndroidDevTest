@@ -22,7 +22,3 @@ fun httpRequest(cityName: String): ItemCity {
         } else ItemCity("no available data for $cityName", "not available", 0, "not available")
     }
 }
-
-
-
-
