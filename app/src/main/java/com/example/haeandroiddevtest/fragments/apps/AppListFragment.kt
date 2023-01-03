@@ -1,5 +1,6 @@
 package com.example.haeandroiddevtest.fragments.apps
 
+import android.content.ActivityNotFoundException
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,7 +31,13 @@ class AppListFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             varAppViewModel = viewModel
 
-            rvAppList.adapter = AppListItemAdapter()
+            rvAppList.adapter = AppListItemAdapter(AppItemListener { appItem ->
+               try {
+                   startActivity(requireActivity().packageManager.getLaunchIntentForPackage(appItem.packageName))
+               } catch (e: ActivityNotFoundException) {
+                   e.printStackTrace()
+               }
+            })
         }
         return binding.root
     }

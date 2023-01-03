@@ -1,7 +1,11 @@
 package com.example.haeandroiddevtest.utils
 
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.get
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.haeandroiddevtest.fragments.apps.AppListItemAdapter
@@ -16,7 +20,7 @@ fun RecyclerView.bindCityData(cities: MutableList<City>?) = cities?.let {
 }
 
 @BindingAdapter("bindCityLayout")
-fun LinearLayout.bindCityLayout(city: City) {
+fun ConstraintLayout.bindCityLayout(city: City) {
     (getChildAt(0) as TextView).text = city.city
     (getChildAt(1) as TextView).text = city.country
     (getChildAt(2) as TextView).text = city.temperature.toString()
@@ -24,12 +28,13 @@ fun LinearLayout.bindCityLayout(city: City) {
 }
 
 @BindingAdapter("bindAppData")
-fun RecyclerView.bindAppData(appItems: MutableList<AppItem>?) = appItems.let {
+fun RecyclerView.bindAppData(appItems: List<AppItem>?) = appItems?.let {
     (adapter as AppListItemAdapter).submitList(appItems)
 }
 
 @BindingAdapter("bindSingleAppInfo")
-fun LinearLayout.bindSingleAppInfo(appItem: AppItem) {
-    (getChildAt(0) as TextView).text = appItem.appName
-    (getChildAt(0) as TextView).text = appItem.packageName
+fun ConstraintLayout.bindSingleAppInfo(appItem: AppItem) {
+    (getChildAt(0) as ImageView).background = appItem.appIcon
+    (getChildAt(1) as TextView).text = appItem.appName
+    (getChildAt(2) as TextView).text = appItem.packageName
 }

@@ -15,8 +15,16 @@ class AppListViewModel(val app: Application) : AndroidViewModel(app) {
 
     init {
         val appList = arrayListOf<AppItem>()
-        app.packageManager.getInstalledApplications(PackageManager.GET_META_DATA).forEach {
-            appList.add(AppItem("filler", it.packageName))
+        app.packageManager.apply {
+            getInstalledApplications(PackageManager.GET_META_DATA).forEach {
+                appList.add(
+                    AppItem(
+                        getApplicationLabel(getApplicationInfo(it.packageName, 0)).toString(),
+                        it.packageName,
+                        getApplicationIcon(it.packageName)
+                    )
+                )
+            }
         }
         _apps.value = appList
     }

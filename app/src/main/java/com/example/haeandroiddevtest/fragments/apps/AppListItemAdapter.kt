@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.haeandroiddevtest.databinding.AppItemViewBinding
 import com.example.haeandroiddevtest.domain.AppItem
 
-class AppListItemAdapter : ListAdapter<AppItem, AppListItemAdapter.ViewHolder>(DiffCallBack) {
+class AppListItemAdapter(private val clickListener: AppItemListener) : ListAdapter<AppItem, AppListItemAdapter.ViewHolder>(DiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), clickListener)
     }
 
     class ViewHolder(private val binding: AppItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -26,8 +26,11 @@ class AppListItemAdapter : ListAdapter<AppItem, AppListItemAdapter.ViewHolder>(D
             }
         }
 
-        fun bind(appItem: AppItem) {
-            binding.varAppItem = appItem
+        fun bind(appItem: AppItem, clickListener: AppItemListener) {
+            binding.apply {
+                varAppItem = appItem
+                varClickListener = clickListener
+            }
         }
     }
 
@@ -40,4 +43,8 @@ class AppListItemAdapter : ListAdapter<AppItem, AppListItemAdapter.ViewHolder>(D
             return oldItem.appName == newItem.appName
         }
     }
+}
+
+class AppItemListener(val clickListener: (appItem: AppItem) -> Unit) {
+    fun onClick(appItem: AppItem) = clickListener(appItem)
 }

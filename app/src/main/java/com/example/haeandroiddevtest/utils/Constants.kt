@@ -1,5 +1,7 @@
 package com.example.haeandroiddevtest.utils
 
+const val PACKAGE_NAME = "com.example.haeandroiddevtest"
+
 // Network
 const val BASE_URL = "https://weather.bfsah.com"
 const val CITY_BEIJING = "beijing"
