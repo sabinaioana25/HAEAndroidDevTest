@@ -11,6 +11,16 @@ import com.example.haeandroiddevtest.domain.ItemCity
 
 class CityItemAdapter : ListAdapter<ItemCity, CityItemAdapter.ViewHolder>(DiffCallBack) {
 
+    companion object DiffCallBack : DiffUtil.ItemCallback<ItemCity>() {
+        override fun areItemsTheSame(oldItem: ItemCity, newItem: ItemCity): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: ItemCity, newItem: ItemCity): Boolean {
+            return oldItem.city == newItem.city
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return from(parent)
     }
@@ -29,16 +39,6 @@ class CityItemAdapter : ListAdapter<ItemCity, CityItemAdapter.ViewHolder>(DiffCa
 
         fun bind(city: ItemCity) {
             binding.varCity = city
-        }
-    }
-
-    companion object DiffCallBack : DiffUtil.ItemCallback<ItemCity>() {
-        override fun areItemsTheSame(oldItem: ItemCity, newItem: ItemCity): Boolean {
-            return oldItem === newItem
-        }
-
-        override fun areContentsTheSame(oldItem: ItemCity, newItem: ItemCity): Boolean {
-            return oldItem.city == newItem.city
         }
     }
 }

@@ -1,18 +1,22 @@
 package com.example.haeandroiddevtest.utils
 
+import android.content.ActivityNotFoundException
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.haeandroiddevtest.fragments.apps.AppListItemAdapter
 import com.example.haeandroiddevtest.fragments.cities.CityItemAdapter
 import com.example.haeandroiddevtest.domain.ItemApp
 import com.example.haeandroiddevtest.domain.ItemCity
+import com.example.haeandroiddevtest.fragments.apps.AppItemListener
 import java.util.*
 
 @BindingAdapter("bindCityData")
 fun RecyclerView.bindCityData(cities: MutableList<ItemCity>?) = cities?.let {
+    adapter = CityItemAdapter()
     (adapter as CityItemAdapter).submitList(cities)
 }
 
@@ -26,7 +30,16 @@ fun ConstraintLayout.bindCityLayout(city: ItemCity) {
 
 @BindingAdapter("bindAppData")
 fun RecyclerView.bindAppData(appItems: List<ItemApp>?) = appItems?.let {
+    context.getActivity()?.let { activity ->
+    adapter = AppListItemAdapter(AppItemListener { appItem ->
+        try {
+            activity.startActivity(activity.packageManager.getLaunchIntentForPackage(appItem.packageName))
+        } catch (e: ActivityNotFoundException) {
+            e.printStackTrace()
+        }
+    })
     (adapter as AppListItemAdapter).submitList(appItems)
+    }
 }
 
 @BindingAdapter("bindSingleAppInfo")

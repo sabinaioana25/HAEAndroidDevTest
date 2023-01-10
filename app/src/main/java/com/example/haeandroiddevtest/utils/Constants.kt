@@ -1,7 +1,7 @@
 package com.example.haeandroiddevtest.utils
 
 // Network
-const val BASE_URL = "https://weather.bfsah.com"
+const val BASE_URL = "http://weather.bfsah.com"
 const val CITY_BEIJING = "beijing"
 const val CITY_BERLIN = "berlin"
 const val CITY_CARDIFF = "cardiff"

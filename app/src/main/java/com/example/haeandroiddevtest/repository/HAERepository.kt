@@ -13,11 +13,11 @@ class HAERepository {
     private val _cityData = MutableLiveData<ArrayList<ItemCity>>(arrayListOf())
     val cityData: LiveData<ArrayList<ItemCity>> = _cityData
 
-    suspend fun refreshList() {
+    suspend fun fetchCities() {
         val cities = withContext(Dispatchers.IO) {
             val cities = arrayListOf<ItemCity>()
             CITIES.forEach { cityName ->
-                cities.add(httpRequest(cityName))
+                cities.add(httpRequest("$BASE_URL/$cityName", cityName))
             }
             return@withContext cities
         }

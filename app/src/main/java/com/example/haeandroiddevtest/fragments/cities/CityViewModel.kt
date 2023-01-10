@@ -18,14 +18,14 @@ class CityViewModel(val app: Application, private val cityDetailsRepository: HAE
     private val _navigateToFragment = MutableLiveData<Boolean>()
     val navigateToFragment: LiveData<Boolean>
         get() = _navigateToFragment
-
     fun onButtonClick() {
         _navigateToFragment.value = true
     }
-
     fun onFragmentNavigated() {
         _navigateToFragment.value = false
     }
+
+    val cities: LiveData<ArrayList<ItemCity>> = cityDetailsRepository.cityData
 
     private var _time = MutableLiveData<String>()
     val time: LiveData<String>
@@ -33,8 +33,6 @@ class CityViewModel(val app: Application, private val cityDetailsRepository: HAE
     private var _batteryCharge = MutableLiveData<Int>()
     val batteryCharge: LiveData<Int>
         get() = _batteryCharge
-
-    val cities: LiveData<ArrayList<ItemCity>> = cityDetailsRepository.cityData
 
     val handler = Handler(Looper.getMainLooper())
     private val runnable = object : Runnable {
@@ -48,7 +46,7 @@ class CityViewModel(val app: Application, private val cityDetailsRepository: HAE
     init {
         handler.post(runnable)
         viewModelScope.launch {
-            cityDetailsRepository.refreshList()
+            cityDetailsRepository.fetchCities()
         }
     }
 

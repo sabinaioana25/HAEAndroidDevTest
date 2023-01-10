@@ -29,14 +29,6 @@ class AppListFragment : Fragment() {
         _binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             varAppViewModel = viewModel
-
-            rvAppList.adapter = AppListItemAdapter(AppItemListener { appItem ->
-                try {
-                    startActivity(requireActivity().packageManager.getLaunchIntentForPackage(appItem.packageName))
-                } catch (e: ActivityNotFoundException) {
-                    e.printStackTrace()
-                }
-            })
         }
         return binding.root
     }
