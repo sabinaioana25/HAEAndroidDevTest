@@ -16,19 +16,22 @@ import com.example.haeandroiddevtest.utils.ViewModelFactory
 class CityFragment : Fragment() {
     private lateinit var viewModel: CityViewModel
     private var _binding: FragmentCityBinding? = null
-    val binding: FragmentCityBinding
+    private val binding: FragmentCityBinding
         get() = _binding!!
+
+    private val haeDetailsRepository = HAERepository()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application, HAERepository()))[CityViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application, haeDetailsRepository))[CityViewModel::class.java]
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_city, container, false)
         _binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             varViewModel = viewModel
+            rvCityList.adapter = CityItemAdapter()
         }
         viewModel.navigateToFragment.observe(viewLifecycleOwner) {
             if (it) {
