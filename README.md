@@ -1,3 +1,3 @@
-# HAEAndroidDevTest
+# LaunchScreenApp
 
-Application to showcase Android components for Android Junior role
+Application includes an app launcher and lists weather information for some cities
